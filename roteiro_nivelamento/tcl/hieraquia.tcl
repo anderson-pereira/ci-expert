@@ -1,7 +1,7 @@
 # Script TCL - Tarefa 2: Hierarquia do Design
 # Lê o arquivo netlist e gera árvore hierárquica
 
-set filename "contador_netlist.tcl"
+set filename "netlist.v"
 set f [open $filename r]
 set content [read $f]
 close $f
