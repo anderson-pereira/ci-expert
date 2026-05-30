@@ -3,13 +3,13 @@
 # ==========================================
 RTL_DIR = rtl
 TB_DIR  = tb
-
+LIB_DIR = libs
 # ==========================================
 # Arquivos
 # ==========================================
 RTL_FILES = $(RTL_DIR)/*.sv
 TB_FILES  = $(TB_DIR)/*.sv
-
+LIB_FILES = $(LIB_DIR)/*.db
 # Top do testbench
 TOP = tb_porta_and
 
@@ -24,6 +24,9 @@ syntax:
 # ==========================================
 compile: syntax
 	vcs -full64 -debug_access+all -kdb $(TOP)
+
+compile_pos_sintax:
+	vcs -sverilog tb/tb_porta_and.sv porta_and_mapeada.sv -v libs/saed32nm.v +neg_tchk -debug_access+all -full64 -timescale=1ps/1ps -kdb
 
 # ==========================================
 # 3. Rodar simulação

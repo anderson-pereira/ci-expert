@@ -17,6 +17,7 @@ module tb_porta_and;
     // Geração do dump FSDB
     // 
     initial begin
+        $sdf_annotate("atrasos_porta_and.sdf", dut);
         $fsdbDumpfile("waves.fsdb");
         $fsdbDumpvars(0, tb_porta_and);
     end
