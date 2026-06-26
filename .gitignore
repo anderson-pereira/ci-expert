@@ -1,6 +1,4 @@
-libs/
-
-
+*lib*
 csrc
 simv*
 *.daidir
