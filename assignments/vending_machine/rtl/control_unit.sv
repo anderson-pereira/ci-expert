@@ -74,6 +74,9 @@ module control_unit
                 if (coin_in != COIN_0) begin
                     credit_load = 1'b1;
                 end
+                mem_read = 1'b1; 
+                // Lê o preço do item selecionado antecipando
+                // como a memória é síncrona, o preço estará disponível na próxima iteração do clock (CHECK)
             end
             CHECK: begin
                 mem_read = 1'b1;

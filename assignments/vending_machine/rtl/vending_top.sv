@@ -20,7 +20,7 @@ module vending_top
     logic mem_read;
     logic mem_write;
     logic can_sell;
-    
+    logic credit_cancel;
     state_e current_state;
     
     price_t credit;
@@ -29,11 +29,12 @@ module vending_top
 
     assign display   = credit;
     assign state_out = current_state;
+    assign credit_cancel = cancel || (current_state == CHANGE);
 
     credit_reg u_credit_reg (
         .clk           (clk),
         .rst           (rst),
-        .cancel        (cancel),
+        .cancel        (credit_cancel),
         .credit_load   (credit_load),
         .coin_in       (coin_in),
         .credit        (credit)
