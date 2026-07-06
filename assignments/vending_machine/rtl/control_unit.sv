@@ -59,6 +59,7 @@ module control_unit
     end
 
     // Lógica de saídas (FSM de Moore)
+    // Alguns sinais de controle antecipados em estados antecessores para deixar os dados síncronos prontos.
     always_comb begin
         credit_load = 1'b0;
         mem_read    = 1'b0;
@@ -68,25 +69,24 @@ module control_unit
 
         case (current_state)
             IDLE: begin
-                // Nenhuma saída ativa
+                credit_load = 1'b1;
+                // Antecipa credit_load, caso coin_in != 0, o valor é armazenado em credit_reg e o estado avança para COLLECT.
             end
             COLLECT: begin
-                if (coin_in != COIN_0) begin
-                    credit_load = 1'b1;
-                end
-                mem_read = 1'b1; 
-                // Lê o preço do item selecionado antecipando
-                // como a memória é síncrona, o preço estará disponível na próxima iteração do clock (CHECK)
+                credit_load = 1'b1;
+                mem_read = 1'b1;
             end
             CHECK: begin
-                mem_read = 1'b1;
+                // Nenhuma ação necessária, apenas aguarda o próximo estado.
+                // mem_read antecipado no estado COLLECT para o dado sincrono estar ponto em CHECK.
             end
             DISPENSE: begin
                 dispense  = 1'b1;
                 mem_write = 1'b1;
             end
             CHANGE: begin
-                credit_load = 1'b1;
+                // Nenhuma ação necessária, apenas aguarda o próximo estado.
+                // Credit_reg limpo em função do estado CHANGE (lógica realizada pelo sinal cancel de credit_reg).
             end
             ERROR: begin
                 error = 1'b1;

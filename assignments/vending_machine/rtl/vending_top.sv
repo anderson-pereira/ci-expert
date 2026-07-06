@@ -22,14 +22,29 @@ module vending_top
     logic can_sell;
     logic credit_cancel;
     state_e current_state;
-    
+    price_t sub_change_out;
+    coin_in_e coin_in_reg;
+
     price_t credit;
     item_info_t item_info;
-    price_t change_comb;
+
 
     assign display   = credit;
     assign state_out = current_state;
     assign credit_cancel = cancel || (current_state == CHANGE);
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            change_out <= price_t'(0);
+        end else begin
+            if (cancel)
+                change_out <= credit;
+            else if(current_state == DISPENSE)
+                change_out <= sub_change_out;
+            else
+                change_out <= price_t'(0);
+        end
+    end
 
     credit_reg u_credit_reg (
         .clk           (clk),
@@ -58,7 +73,7 @@ module vending_top
     subtractor u_subtractor (
         .credit (credit),
         .price  (item_info.price),
-        .change (change_comb)
+        .change (sub_change_out)
     );
 
     control_unit u_control_unit (
@@ -75,17 +90,5 @@ module vending_top
         .error         (error),
         .current_state (current_state)
     );
-
-    always_ff @(posedge clk) begin
-        if (rst) begin
-            change_out <= price_t'(0);
-        end else if (cancel) begin
-            change_out <= credit; // Devolve o crédito acumulado ao cancelar
-        end else if (current_state == CHANGE) begin
-            change_out <= change_comb;
-        end
-    end
-
-
 
 endmodule
