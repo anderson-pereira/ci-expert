@@ -31,7 +31,7 @@ module control_unit
     // Lógica de próximo estado
     always_comb begin
         next_state = current_state;
-        case (current_state)
+        unique case (current_state)
             IDLE: begin
                 if (coin_in != COIN_0)  next_state = COLLECT;
                 else                    next_state = IDLE;
@@ -67,7 +67,7 @@ module control_unit
         dispense    = 1'b0;
         error       = 1'b0;
 
-        case (current_state)
+        unique case (current_state)
             IDLE: begin
                 credit_load = 1'b1;
                 // Antecipa credit_load, caso coin_in != 0, o valor é armazenado em credit_reg e o estado avança para COLLECT.

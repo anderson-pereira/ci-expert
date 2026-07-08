@@ -17,6 +17,7 @@ LIB_DIR   := $(ROOT_DIR)/libs
 # Build Directories (Artifacts)
 # ==========================================
 BUILD_DIR   := $(ROOT_DIR)/build
+REPORT_DIR   := $(ROOT_DIR)/reports
 SIM_RTL_OUT := $(BUILD_DIR)/sim_rtl
 SIM_GLS_OUT := $(BUILD_DIR)/sim_gls
 SYNTH_OUT   := $(BUILD_DIR)/synthesis
@@ -41,12 +42,12 @@ TB_FILES  = $(TB_DIR)/tb_vending.sv
 # Testbench Top & Scripts
 # ==========================================
 TOP = tb_vending
-SYNTH_SCRIPT = $(SYNTH_DIR)/synthesize.tcl
+SYNTH_SCRIPT = $(SYNTH_DIR)/synth.tcl
 
 # ==========================================
 # Post-Synthesis / Gate-Level Files
 # ==========================================
-RTL_SYNTH_FILES := $(SYNTH_OUT)/vending_machine_syn.v
+RTL_SYNTH_FILES := $(SYNTH_OUT)/vending_top_syn.v
 RTL_LIB_FILES   := $(LIB_VERILOG)
 
 # ==========================================
@@ -77,6 +78,9 @@ VCS_GLS_FLAGS = $(VCS_FLAGS) \
 # ==========================================
 $(LIB_DIR):
 	mkdir -p $(LIB_DIR)
+
+$(REPORT_DIR):
+	mkdir -p $(REPORT_DIR)
 
 $(LIB_VERILOG): | $(LIB_DIR)
 	@echo "[INFO] Copying PDK Verilog library..."
@@ -112,8 +116,8 @@ rtl_syntax: prep_sim_rtl
 rtl_compile: rtl_syntax
 	cd $(SIM_RTL_OUT) && vcs $(VCS_FLAGS) -top $(TOP)
 
-rtl_run:
-	cd $(SIM_RTL_OUT) && ./simv -l simulation.log
+rtl_run: $(REPORT_DIR)
+	cd $(SIM_RTL_OUT) && ./simv -l $(REPORT_DIR)/rtl_simulation.log
 
 rtl_view: rtl_run
 	cd $(SIM_RTL_OUT) && verdi -ssf waves.fsdb &
@@ -121,7 +125,7 @@ rtl_view: rtl_run
 # ==========================================
 # Gate-Level Syntax / Compilation / View
 # ==========================================
-gls_syntax: prep_sim_gls synthesis
+gls_syntax: prep_sim_gls synth
 	cd $(SIM_GLS_OUT) && vlogan $(VLOGAN_FLAGS) \
 		$(PKG_FILES) \
 		$(RTL_LIB_FILES) \
@@ -131,8 +135,8 @@ gls_syntax: prep_sim_gls synthesis
 gls_compile: gls_syntax
 	cd $(SIM_GLS_OUT) && vcs $(VCS_GLS_FLAGS) -top $(TOP)
 
-gls_run:
-	cd $(SIM_GLS_OUT) && ./simv -l gls_simulation.log
+gls_run: $(REPORT_DIR)
+	cd $(SIM_GLS_OUT) && ./simv -l $(REPORT_DIR)/gls_simulation.log
 
 gls_view: gls_run
 	cd $(SIM_GLS_OUT) && verdi -ssf waves.fsdb &
@@ -140,22 +144,23 @@ gls_view: gls_run
 # ==========================================
 # Synthesis Elaboration / View
 # ==========================================
-synthesis: prep_synth
+synth: prep_synth
 	cd $(SYNTH_OUT) && env ROOT_DIR=$(ROOT_DIR) dc_shell -f $(SYNTH_SCRIPT) | tee synthesis.log
 
 synth_view:
-	cd $(SYNTH_OUT) && design_vision -x "set env(ROOT_DIR) $(ROOT_DIR); source $(SYNTH_DIR)/.synopsys_dc.setup; read_ddc vending_machine.ddc"
+	cd $(SYNTH_OUT) && design_vision -x "set env(ROOT_DIR) $(ROOT_DIR); source $(SYNTH_DIR)/dc_setup.tcl; read_ddc $(SYNTH_OUT)/vending_top.ddc"
 
 # ==========================================
 # Simulation + Synthesis + GLS + View
 # ==========================================
-all: rtl_compile synthesis gls_compile synth_view
+all: rtl_compile synthesis gls_compile rtl_run gls_run synth_view
 
 # ==========================================
 # Clean-up
 # ==========================================
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -rf $(REPORT_DIR)
 	rm -rf novas.rc novas.conf
 
 clean_libs:

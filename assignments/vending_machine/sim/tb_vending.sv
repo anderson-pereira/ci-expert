@@ -66,9 +66,13 @@ module tb_vending;
     endtask
 
     task automatic buy_item(input item_e item, input coin_in_e coins[]);
+        $display("Buying item: %s | Coins inserted: %p", item.name(), coins);
+        check(IDLE, state_out, "State = IDLE");
         foreach(coins[i]) apply_coin(coins[i]);
+        check(COLLECT, state_out, "State = COLLECT");
         apply_sel(item);
         apply_pulse(confirm);
+        check(CHECK, state_out, "State = CHECK");
     endtask
 
     task automatic check(input int expected, input int actual, input string label);
@@ -119,8 +123,7 @@ module tb_vending;
         $display("SCENARIO 1: Successful purchase with change (Coffee)");
         $display("==================================================");
         
-        buy_item(COFFE, '{COIN_100});
-        check(CHECK, state_out, "State = CHECK");
+        buy_item(COFFE, '{COIN_50, COIN_25, COIN_25});
 
         `WAIT_AND_CHECK(1, DISPENSE, state_out, "State = DISPENSE")
         #1 check(1, dispense, "Dispense pulse active");
@@ -138,7 +141,6 @@ module tb_vending;
         init_with_defaults();
 
         buy_item(SNACK, '{COIN_25});
-        check(CHECK, state_out, "State = CHECK");
 
         `WAIT_AND_CHECK(1, ERROR, state_out, "State = ERROR")
         check(1, error, "Error signal asserted");
@@ -154,8 +156,10 @@ module tb_vending;
         $display("==================================================");
         init_with_defaults();
 
+        check(IDLE, state_out, "State = IDLE");
         apply_coin(COIN_100);
         apply_coin(COIN_100); 
+        check(COLLECT, state_out, "State = COLLECT");
         
         wait_posedge_clk(1); 
         
@@ -172,10 +176,10 @@ module tb_vending;
         $display("==================================================");
         init_with_defaults();
 
+        
         for (int i = 1; i <= 5; i++) begin
             $display("--- Coffee purchase attempt %0d/5 ---", i);
             buy_item(COFFE, '{COIN_25});
-            check(CHECK, state_out, "State = CHECK");
             `WAIT_AND_CHECK(1, DISPENSE, state_out, "State = DISPENSE (In stock)")
             `WAIT_AND_CHECK(1, CHANGE, state_out, "State = CHANGE")
             `WAIT_AND_CHECK(1, IDLE, state_out, "State = IDLE")
@@ -183,7 +187,6 @@ module tb_vending;
         
         $display("--- Attempt 6 (Stock should be empty) ---");
         buy_item(COFFE, '{COIN_25});
-        check(CHECK, state_out, "State = CHECK");
 
         `WAIT_AND_CHECK(1, ERROR, state_out, "State = ERROR (Out of stock)")
         check(1, error, "Error signal asserted due to empty stock");
@@ -200,6 +203,7 @@ module tb_vending;
         end else begin
             $display("STATUS: FAILED (%0d Errors Found)", total_errors);
         end
+        $display("\n\n");
         $finish;
     end
 endmodule

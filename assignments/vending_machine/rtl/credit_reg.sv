@@ -12,12 +12,11 @@ module credit_reg
     price_t coin_value;
 
     always_comb begin
-        case (coin_in)
+        unique case (coin_in)
             COIN_0   : coin_value = COIN_0_VAL;
             COIN_25  : coin_value = COIN_25_VAL;
             COIN_50  : coin_value = COIN_50_VAL;
             COIN_100 : coin_value = COIN_100_VAL;
-            default  : coin_value = COIN_0_VAL;
         endcase
     end
 
