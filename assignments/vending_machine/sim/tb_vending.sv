@@ -123,7 +123,7 @@ module tb_vending;
         $display("SCENARIO 1: Successful purchase with change (Coffee)");
         $display("==================================================");
         
-        buy_item(COFFE, '{COIN_50, COIN_25, COIN_25});
+        buy_item(COFFE, '{COIN_100});
 
         `WAIT_AND_CHECK(1, DISPENSE, state_out, "State = DISPENSE")
         #1 check(1, dispense, "Dispense pulse active");

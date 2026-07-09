@@ -31,9 +31,9 @@ module vending_top
 
     assign display   = credit;
     assign state_out = current_state;
-    assign credit_cancel = cancel || (current_state == CHANGE);
+    
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk) begin : change_out_logic_register
         if (rst) begin
             change_out <= price_t'(0);
         end else begin
@@ -71,9 +71,9 @@ module vending_top
     );
 
     subtractor u_subtractor (
-        .credit (credit),
-        .price  (item_info.price),
-        .change (sub_change_out)
+        .credit     (credit),
+        .item_info  (item_info),
+        .change     (sub_change_out)
     );
 
     control_unit u_control_unit (
@@ -84,6 +84,7 @@ module vending_top
         .can_sell      (can_sell),
         .coin_in       (coin_in),
         .credit_load   (credit_load),
+        .credit_cancel (credit_cancel),
         .mem_read      (mem_read),
         .mem_write     (mem_write),
         .dispense      (dispense),

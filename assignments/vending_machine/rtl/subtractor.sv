@@ -2,9 +2,9 @@ module subtractor
     import vending_pkg::*;
 (
     input  price_t credit,
-    input  price_t price,
+    input  item_info_t item_info,
     output price_t change
 );
-    assign change = credit - price;
+    assign change = credit - item_info.price;
 
 endmodule

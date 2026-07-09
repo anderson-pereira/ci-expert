@@ -10,12 +10,15 @@ module control_unit
     input  coin_in_e    coin_in,
 
     output logic        credit_load,
+    output logic        credit_cancel,
     output logic        mem_read,
     output logic        mem_write,
     output logic        dispense,
     output logic        error,
     output state_e      current_state
 );
+
+    assign credit_cancel = cancel || (current_state == CHANGE);
 
     state_e next_state;
 
