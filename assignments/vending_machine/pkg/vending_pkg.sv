@@ -41,6 +41,6 @@ package vending_pkg;
         SNACK = 2'b11
     } item_e;
 
-    localparam int NUM_ITEMS = COFFE.num();
+    localparam int NUM_ITEMS = 4; // Formality compatible parameter.
 
 endpackage

@@ -6,7 +6,7 @@ Report : timing
         -max_paths 10
 Design : vending_top
 Version: X-2025.06-SP2
-Date   : Tue Jul  7 23:17:38 2026
+Date   : Fri Jul 17 19:01:30 2026
 ****************************************
 
 Operating Conditions: tt1p05v25c   Library: saed32rvt_tt1p05v25c
@@ -30,26 +30,26 @@ Wire Load Model Mode: enclosed
   input external delay                                    3.00       3.00 r
   coin_in[1] (in)                                         0.00       3.00 r
   u_credit_reg/coin_in[1] (credit_reg)                    0.00       3.00 r
-  u_credit_reg/U3/Y (INVX0_RVT)                           0.06       3.06 f
-  u_credit_reg/U4/Y (NAND2X0_RVT)                         0.06       3.12 r
-  u_credit_reg/U5/Y (INVX0_RVT)                           0.04       3.16 f
-  u_credit_reg/U11/Y (AO22X1_RVT)                         0.05       3.21 f
-  u_credit_reg/U15/Y (AO22X1_RVT)                         0.05       3.26 f
-  u_credit_reg/U19/Y (NAND2X0_RVT)                        0.05       3.31 r
-  u_credit_reg/U21/Y (NAND2X0_RVT)                        0.05       3.35 f
-  u_credit_reg/U25/Y (NAND2X0_RVT)                        0.06       3.41 r
-  u_credit_reg/U27/Y (AO21X1_RVT)                         0.07       3.47 r
-  u_credit_reg/U32/Y (INVX0_RVT)                          0.03       3.50 f
-  u_credit_reg/U33/Y (AO21X1_RVT)                         0.04       3.55 f
-  u_credit_reg/U34/Y (INVX0_RVT)                          0.04       3.59 r
-  u_credit_reg/U38/Y (OA222X1_RVT)                        0.07       3.66 r
-  u_credit_reg/U41/Y (OR3X1_RVT)                          0.06       3.72 r
-  u_credit_reg/U45/Y (INVX0_RVT)                          0.03       3.75 f
-  u_credit_reg/U47/Y (OA221X1_RVT)                        0.07       3.82 f
-  u_credit_reg/U48/SO (HADDX1_RVT)                        0.08       3.90 r
-  u_credit_reg/U49/Y (AND2X1_RVT)                         0.04       3.95 r
-  u_credit_reg/credit_reg[7]/D (DFFX1_RVT)                0.01       3.96 r
-  data arrival time                                                  3.96
+  u_credit_reg/U6/Y (INVX0_RVT)                           0.06       3.06 f
+  u_credit_reg/U7/Y (NAND2X0_RVT)                         0.06       3.12 r
+  u_credit_reg/U8/Y (INVX0_RVT)                           0.04       3.16 f
+  u_credit_reg/U14/Y (AO22X1_RVT)                         0.05       3.21 f
+  u_credit_reg/U18/Y (AO22X1_RVT)                         0.05       3.26 f
+  u_credit_reg/U22/Y (NAND2X0_RVT)                        0.05       3.31 r
+  u_credit_reg/U24/Y (NAND2X0_RVT)                        0.05       3.35 f
+  u_credit_reg/U28/Y (NAND2X0_RVT)                        0.06       3.41 r
+  u_credit_reg/U30/Y (AO21X1_RVT)                         0.07       3.47 r
+  u_credit_reg/U35/Y (INVX0_RVT)                          0.03       3.50 f
+  u_credit_reg/U36/Y (AO21X1_RVT)                         0.04       3.55 f
+  u_credit_reg/U37/Y (INVX0_RVT)                          0.04       3.59 r
+  u_credit_reg/U41/Y (OA222X1_RVT)                        0.07       3.66 r
+  u_credit_reg/U44/Y (OR3X1_RVT)                          0.06       3.72 r
+  u_credit_reg/U5/Y (NAND2X0_RVT)                         0.04       3.76 f
+  u_credit_reg/U3/Y (AND2X1_RVT)                          0.05       3.81 f
+  u_credit_reg/U48/SO (HADDX1_RVT)                        0.08       3.89 r
+  u_credit_reg/U49/Y (AND2X1_RVT)                         0.04       3.93 r
+  u_credit_reg/credit_reg[7]/D (DFFX1_RVT)                0.01       3.94 r
+  data arrival time                                                  3.94
 
   clock clk (rise edge)                                  20.00      20.00
   clock network delay (ideal)                             0.00      20.00
@@ -59,9 +59,9 @@ Wire Load Model Mode: enclosed
   data required time                                                19.77
   --------------------------------------------------------------------------
   data required time                                                19.77
-  data arrival time                                                 -3.96
+  data arrival time                                                 -3.94
   --------------------------------------------------------------------------
-  slack (MET)                                                       15.81
+  slack (MET)                                                       15.83
 
 
   Startpoint: coin_in[1] (input port clocked by clk)
@@ -82,23 +82,23 @@ Wire Load Model Mode: enclosed
   input external delay                                    3.00       3.00 r
   coin_in[1] (in)                                         0.00       3.00 r
   u_credit_reg/coin_in[1] (credit_reg)                    0.00       3.00 r
-  u_credit_reg/U3/Y (INVX0_RVT)                           0.06       3.06 f
-  u_credit_reg/U4/Y (NAND2X0_RVT)                         0.06       3.12 r
-  u_credit_reg/U5/Y (INVX0_RVT)                           0.04       3.16 f
-  u_credit_reg/U11/Y (AO22X1_RVT)                         0.05       3.21 f
-  u_credit_reg/U15/Y (AO22X1_RVT)                         0.05       3.26 f
-  u_credit_reg/U19/Y (NAND2X0_RVT)                        0.05       3.31 r
-  u_credit_reg/U21/Y (NAND2X0_RVT)                        0.05       3.35 f
-  u_credit_reg/U25/Y (NAND2X0_RVT)                        0.06       3.41 r
-  u_credit_reg/U27/Y (AO21X1_RVT)                         0.07       3.47 r
-  u_credit_reg/U32/Y (INVX0_RVT)                          0.03       3.50 f
-  u_credit_reg/U33/Y (AO21X1_RVT)                         0.04       3.55 f
-  u_credit_reg/U34/Y (INVX0_RVT)                          0.04       3.59 r
-  u_credit_reg/U38/Y (OA222X1_RVT)                        0.07       3.66 r
-  u_credit_reg/U41/Y (OR3X1_RVT)                          0.06       3.72 r
-  u_credit_reg/U42/Y (NAND3X0_RVT)                        0.06       3.78 f
-  u_credit_reg/U43/Y (INVX0_RVT)                          0.04       3.82 r
-  u_credit_reg/U44/Y (OA221X1_RVT)                        0.06       3.88 r
+  u_credit_reg/U6/Y (INVX0_RVT)                           0.06       3.06 f
+  u_credit_reg/U7/Y (NAND2X0_RVT)                         0.06       3.12 r
+  u_credit_reg/U8/Y (INVX0_RVT)                           0.04       3.16 f
+  u_credit_reg/U14/Y (AO22X1_RVT)                         0.05       3.21 f
+  u_credit_reg/U18/Y (AO22X1_RVT)                         0.05       3.26 f
+  u_credit_reg/U22/Y (NAND2X0_RVT)                        0.05       3.31 r
+  u_credit_reg/U24/Y (NAND2X0_RVT)                        0.05       3.35 f
+  u_credit_reg/U28/Y (NAND2X0_RVT)                        0.06       3.41 r
+  u_credit_reg/U30/Y (AO21X1_RVT)                         0.07       3.47 r
+  u_credit_reg/U35/Y (INVX0_RVT)                          0.03       3.50 f
+  u_credit_reg/U36/Y (AO21X1_RVT)                         0.04       3.55 f
+  u_credit_reg/U37/Y (INVX0_RVT)                          0.04       3.59 r
+  u_credit_reg/U41/Y (OA222X1_RVT)                        0.07       3.66 r
+  u_credit_reg/U44/Y (OR3X1_RVT)                          0.06       3.72 r
+  u_credit_reg/U45/Y (NAND3X0_RVT)                        0.06       3.78 f
+  u_credit_reg/U46/Y (INVX0_RVT)                          0.04       3.82 r
+  u_credit_reg/U47/Y (OA221X1_RVT)                        0.06       3.88 r
   u_credit_reg/credit_reg[6]/D (DFFX1_RVT)                0.01       3.89 r
   data arrival time                                                  3.89
 
@@ -133,21 +133,21 @@ Wire Load Model Mode: enclosed
   input external delay                                    3.00       3.00 f
   coin_in[1] (in)                                         0.00       3.00 f
   u_credit_reg/coin_in[1] (credit_reg)                    0.00       3.00 f
-  u_credit_reg/U3/Y (INVX0_RVT)                           0.05       3.05 r
-  u_credit_reg/U4/Y (NAND2X0_RVT)                         0.05       3.10 f
-  u_credit_reg/U5/Y (INVX0_RVT)                           0.04       3.15 r
-  u_credit_reg/U11/Y (AO22X1_RVT)                         0.06       3.20 r
-  u_credit_reg/U15/Y (AO22X1_RVT)                         0.06       3.26 r
-  u_credit_reg/U19/Y (NAND2X0_RVT)                        0.05       3.31 f
-  u_credit_reg/U21/Y (NAND2X0_RVT)                        0.05       3.36 r
-  u_credit_reg/U25/Y (NAND2X0_RVT)                        0.05       3.41 f
-  u_credit_reg/U27/Y (AO21X1_RVT)                         0.07       3.47 f
-  u_credit_reg/U32/Y (INVX0_RVT)                          0.03       3.50 r
-  u_credit_reg/U33/Y (AO21X1_RVT)                         0.04       3.55 r
-  u_credit_reg/U34/Y (INVX0_RVT)                          0.04       3.59 f
-  u_credit_reg/U35/Y (OA221X1_RVT)                        0.07       3.66 f
-  u_credit_reg/U36/Y (INVX0_RVT)                          0.03       3.69 r
-  u_credit_reg/U37/Y (OA221X1_RVT)                        0.06       3.75 r
+  u_credit_reg/U6/Y (INVX0_RVT)                           0.05       3.05 r
+  u_credit_reg/U7/Y (NAND2X0_RVT)                         0.05       3.10 f
+  u_credit_reg/U8/Y (INVX0_RVT)                           0.04       3.15 r
+  u_credit_reg/U14/Y (AO22X1_RVT)                         0.06       3.20 r
+  u_credit_reg/U18/Y (AO22X1_RVT)                         0.06       3.26 r
+  u_credit_reg/U22/Y (NAND2X0_RVT)                        0.05       3.31 f
+  u_credit_reg/U24/Y (NAND2X0_RVT)                        0.05       3.36 r
+  u_credit_reg/U28/Y (NAND2X0_RVT)                        0.05       3.41 f
+  u_credit_reg/U30/Y (AO21X1_RVT)                         0.07       3.47 f
+  u_credit_reg/U35/Y (INVX0_RVT)                          0.03       3.50 r
+  u_credit_reg/U36/Y (AO21X1_RVT)                         0.04       3.55 r
+  u_credit_reg/U37/Y (INVX0_RVT)                          0.04       3.59 f
+  u_credit_reg/U38/Y (OA221X1_RVT)                        0.07       3.66 f
+  u_credit_reg/U39/Y (INVX0_RVT)                          0.03       3.69 r
+  u_credit_reg/U40/Y (OA221X1_RVT)                        0.06       3.75 r
   u_credit_reg/credit_reg[5]/D (DFFX1_RVT)                0.01       3.76 r
   data arrival time                                                  3.76
 

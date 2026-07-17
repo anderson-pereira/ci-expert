@@ -1,5 +1,5 @@
 Information: Performing leakage power optimization. (PWR-850)
-CPU Load: 25%, Ram Free: 71 GB, Swap Free: 15 GB, Work Disk Free: 3593 GB, Tmp Disk Free: 85 GB
+CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
 Analyzing: "/home/anderson.pereira/CIExpert/git-pessoal/assignments/vending_machine/libs/saed32rvt_tt1p05v25c.db"
 Library analysis succeeded.
 Information: Evaluating DesignWare library utilization. (UISN-27)
@@ -20,7 +20,7 @@ Information: Evaluating DesignWare library utilization. (UISN-27)
 | Design Information                                      | Value                                  |
 ====================================================================================================
 | Number of Scenarios                                     | 0                                      |
-| Leaf Cell Count                                         | 240                                    |
+| Leaf Cell Count                                         | 239                                    |
 | Number of User Hierarchies                              | 5                                      |
 | Sequential Cell Count                                   | 99                                     |
 | Macro Count                                             | 0                                      |
@@ -37,12 +37,12 @@ Information: Evaluating DesignWare library utilization. (UISN-27)
 ====================================================================================================
 Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
 
-Information: There are 3 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+Information: There are 11 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
 
   Simplifying Design 'vending_top'
 
 Loaded alib file './alib-52/saed32rvt_tt1p05v25c.db.alib'
-CPU Load: 27%, Ram Free: 71 GB, Swap Free: 15 GB, Work Disk Free: 3593 GB, Tmp Disk Free: 85 GB
+CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
 Information: State dependent leakage is now switched from on to off.
 
   Beginning Pass 1 Mapping
@@ -91,7 +91,7 @@ Information: The register 'item_info_reg[price][7]' is a constant and will be re
 Information: Added key list 'DesignWare' to design 'comparator'. (DDB-72)
   Processing 'subtractor'
  Implement Synthetic for 'subtractor'.
-CPU Load: 27%, Ram Free: 71 GB, Swap Free: 15 GB, Work Disk Free: 3593 GB, Tmp Disk Free: 85 GB
+CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
 
   Updating timing information
 Information: Updating design information... (UID-85)
@@ -117,8 +117,8 @@ Information: Added key list 'DesignWare' to design 'subtractor'. (DDB-72)
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:02     990.4      0.00       0.0       0.0                           131223840.0000
-    0:00:02     990.4      0.00       0.0       0.0                           131223840.0000
+    0:00:02     987.9      0.00       0.0       0.0                           131176440.0000
+    0:00:02     987.9      0.00       0.0       0.0                           131176440.0000
 
 Threshold voltage group cell usage:
 >> saed32cell_svt 100.00%
@@ -175,53 +175,53 @@ Threshold voltage group cell usage:
 
   Beginning Delay Optimization
   ----------------------------
-    0:00:02     944.7      0.00       0.0       0.0                           111159536.0000
-    0:00:02     944.7      0.00       0.0       0.0                           111159536.0000
-    0:00:02     944.7      0.00       0.0       0.0                           111159536.0000
-    0:00:02     943.1      0.00       0.0       0.0                           110535664.0000
+    0:00:02     942.1      0.00       0.0       0.0                           111061080.0000
+    0:00:02     942.1      0.00       0.0       0.0                           111061080.0000
+    0:00:02     942.1      0.00       0.0       0.0                           111061080.0000
+    0:00:02     940.6      0.00       0.0       0.0                           110437200.0000
 
 Threshold voltage group cell usage:
 >> saed32cell_svt 100.00%
-    0:00:02     942.6      0.00       0.0       0.0                           110318656.0000
-    0:00:02     942.6      0.00       0.0       0.0                           110318656.0000
+    0:00:02     940.1      0.00       0.0       0.0                           110220192.0000
+    0:00:02     940.1      0.00       0.0       0.0                           110220192.0000
 
   Beginning WLM Backend Optimization
   --------------------------------------
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           109928312.0000
-    0:00:02     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:02     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:02     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:02     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:02     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:02     938.6      0.00       0.0       0.0                           108380576.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           110025824.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
 
                                   TOTAL                                                
    ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:00:02     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-    0:00:03     938.6      0.00       0.0       0.0                           108380576.0000
-CPU Load: 27%, Ram Free: 71 GB, Swap Free: 15 GB, Work Disk Free: 3593 GB, Tmp Disk Free: 85 GB
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
+CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
 Loading db file '/home/anderson.pereira/CIExpert/git-pessoal/assignments/vending_machine/libs/saed32rvt_tt1p05v25c.db'
 
 
@@ -232,7 +232,7 @@ Note: Symbol # after min delay cost means estimated hold TNS across all active s
   ---------------------
 Information: State dependent leakage is now switched from off to on.
 Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
-CPU Load: 25%, Ram Free: 71 GB, Swap Free: 15 GB, Work Disk Free: 3593 GB, Tmp Disk Free: 85 GB
+CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
 Information: Total number of MV cells in the design.
 ----------------------------------------------------------------------------------------------------
  MV Cells                                           Total Number                                   

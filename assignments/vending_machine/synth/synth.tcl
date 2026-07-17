@@ -6,7 +6,7 @@ set ROOT_DIR $env(ROOT_DIR)
 
 # Define the output directory for ALL generated artifacts
 set SYNTH_DIR "${ROOT_DIR}/build/synthesis"
-set REPORT_DIR "${ROOT_DIR}/reports"
+set REPORT_DIR "${ROOT_DIR}/reports/synthesis"
 
 # Ensure the output directory exists (works like 'mkdir -p')
 file mkdir ${SYNTH_DIR}
@@ -50,6 +50,7 @@ echo ""
 echo "=================================================="
 echo "STARTING SYNTHESIS (compile_ultra)"
 echo "=================================================="
+set_svf ${REPORT_DIR}/default.svf
 redirect -tee ${REPORT_DIR}/compile_ultra.log { compile_ultra -no_autoungroup }
 
 

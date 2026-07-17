@@ -1,7 +1,7 @@
 Command: /home/anderson.pereira/CIExpert/git-pessoal/assignments/vending_machine/build/sim_rtl/./simv -l /home/anderson.pereira/CIExpert/git-pessoal/assignments/vending_machine/reports/rtl_simulation.log
 Chronologic VCS simulator copyright 1991-2025
 Contains Synopsys proprietary information.
-Compiler version X-2025.06-SP2_Full64; Runtime version X-2025.06-SP2_Full64;  Jul  7 23:17 2026
+Compiler version X-2025.06-SP2_Full64; Runtime version X-2025.06-SP2_Full64;  Jul 17 19:01 2026
 *Verdi* Loading libsscore_vcs202506.so
 FSDB Dumper for VCS, Release Verdi_X-2025.06-SP2, Linux x86_64/64bit, 11/27/2025
 (C) 1996 - 2025 by Synopsys, Inc.
@@ -21,7 +21,7 @@ Warning-[RT-NCMUCS] No condition matches in statement
 ==================================================
 SCENARIO 1: Successful purchase with change (Coffee)
 ==================================================
-Buying item: COFFE | Coins inserted: '{COIN_50, COIN_25, COIN_25} 
+Buying item: COFFE | Coins inserted: '{COIN_100} 
 [PASS] State = IDLE | Expected: 0, Actual: 0
 [PASS] State = COLLECT | Expected: 1, Actual: 1
 [PASS] State = CHECK | Expected: 2, Actual: 2
@@ -113,8 +113,8 @@ STATUS: PASSED (0 Errors)
 
 
 $finish called from file "/home/anderson.pereira/CIExpert/git-pessoal/assignments/vending_machine/sim/tb_vending.sv", line 207.
-$finish at simulation time               816000
+$finish at simulation time               776000
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 816000 ps
-CPU Time:      0.420 seconds;       Data structure size:   0.0Mb
-Tue Jul  7 23:17:47 2026
+Time: 776000 ps
+CPU Time:      0.480 seconds;       Data structure size:   0.0Mb
+Fri Jul 17 19:01:38 2026

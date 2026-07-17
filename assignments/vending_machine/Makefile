@@ -12,15 +12,16 @@ TB_DIR    := $(ROOT_DIR)/sim
 SYNTH_DIR := $(ROOT_DIR)/synth
 PKG_DIR   := $(ROOT_DIR)/pkg
 LIB_DIR   := $(ROOT_DIR)/libs
-
+FM_DIR	  := $(ROOT_DIR)/fm
 # ==========================================
 # Build Directories (Artifacts)
 # ==========================================
 BUILD_DIR   := $(ROOT_DIR)/build
-REPORT_DIR   := $(ROOT_DIR)/reports
+REPORT_DIR  := $(ROOT_DIR)/reports
 SIM_RTL_OUT := $(BUILD_DIR)/sim_rtl
 SIM_GLS_OUT := $(BUILD_DIR)/sim_gls
 SYNTH_OUT   := $(BUILD_DIR)/synthesis
+FM_OUT  	:= $(BUILD_DIR)/formality
 
 # ==========================================
 # PDK Configuration (External Libraries)
@@ -43,6 +44,8 @@ TB_FILES  = $(TB_DIR)/tb_vending.sv
 # ==========================================
 TOP = tb_vending
 SYNTH_SCRIPT = $(SYNTH_DIR)/synth.tcl
+FM_SCRIPT = $(FM_DIR)/formality.tcl
+FM_AUTO_SCRIPT = $(FM_DIR)/formality_auto.tcl
 
 # ==========================================
 # Post-Synthesis / Gate-Level Files
@@ -89,6 +92,9 @@ $(LIB_VERILOG): | $(LIB_DIR)
 $(LIB_DB): | $(LIB_DIR)
 	@echo "[INFO] Copying PDK Synthesis library (DB)..."
 	cp $(PDK_DB_SRC) $@
+
+$(FM_OUT):
+	mkdir -p $(FM_OUT)
 
 prep_libs: $(LIB_VERILOG) $(LIB_DB)
 
@@ -150,10 +156,19 @@ synth: prep_synth
 synth_view:
 	cd $(SYNTH_OUT) && design_vision -x "set env(ROOT_DIR) $(ROOT_DIR); source $(SYNTH_DIR)/dc_setup.tcl; read_ddc $(SYNTH_OUT)/vending_top.ddc"
 
+formality: $(FM_OUT)
+	cd $(FM_OUT) && env ROOT_DIR=$(ROOT_DIR) fm_shell -f $(FM_SCRIPT) | tee formality.log
+
+generate_fm_auto_script: $(FM_OUT)
+	cd $(FM_DIR) && fm_mk_script $(REPORT_DIR)/default.svf -output $(FM_AUTO_SCRIPT)
+
+formality_auto: generate_fm_auto_script
+	cd $(FM_OUT) && env ROOT_DIR=$(ROOT_DIR) fm_shell -f $(FM_AUTO_SCRIPT) | tee formality_auto.log
+
 # ==========================================
 # Simulation + Synthesis + GLS + View
 # ==========================================
-all: rtl_compile synthesis gls_compile rtl_run gls_run synth_view
+all: rtl_compile synthesis gls_compile rtl_run gls_run formality synth_view
 
 # ==========================================
 # Clean-up
