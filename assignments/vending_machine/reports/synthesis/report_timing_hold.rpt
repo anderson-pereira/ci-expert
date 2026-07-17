@@ -6,7 +6,7 @@ Report : timing
         -max_paths 10
 Design : vending_top
 Version: X-2025.06-SP2
-Date   : Fri Jul 17 19:01:30 2026
+Date   : Fri Jul 17 19:55:57 2026
 ****************************************
 
 Operating Conditions: tt1p05v25c   Library: saed32rvt_tt1p05v25c

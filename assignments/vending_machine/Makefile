@@ -12,16 +12,20 @@ TB_DIR    := $(ROOT_DIR)/sim
 SYNTH_DIR := $(ROOT_DIR)/synth
 PKG_DIR   := $(ROOT_DIR)/pkg
 LIB_DIR   := $(ROOT_DIR)/libs
-FM_DIR	  := $(ROOT_DIR)/fm
+FM_DIR    := $(ROOT_DIR)/fm
+DFT_DIR   := $(ROOT_DIR)/dft
+
 # ==========================================
 # Build Directories (Artifacts)
 # ==========================================
-BUILD_DIR   := $(ROOT_DIR)/build
-REPORT_DIR  := $(ROOT_DIR)/reports
-SIM_RTL_OUT := $(BUILD_DIR)/sim_rtl
-SIM_GLS_OUT := $(BUILD_DIR)/sim_gls
-SYNTH_OUT   := $(BUILD_DIR)/synthesis
-FM_OUT  	:= $(BUILD_DIR)/formality
+BUILD_DIR    := $(ROOT_DIR)/build
+REPORT_DIR   := $(ROOT_DIR)/reports
+SIM_RTL_OUT  := $(BUILD_DIR)/sim_rtl
+SIM_GLS_OUT  := $(BUILD_DIR)/sim_gls
+SYNTH_OUT    := $(BUILD_DIR)/synthesis
+FM_OUT       := $(BUILD_DIR)/formality
+DFT_OUT      := $(BUILD_DIR)/dft
+FM_DFT_OUT   := $(BUILD_DIR)/formality_dft
 
 # ==========================================
 # PDK Configuration (External Libraries)
@@ -46,6 +50,8 @@ TOP = tb_vending
 SYNTH_SCRIPT = $(SYNTH_DIR)/synth.tcl
 FM_SCRIPT = $(FM_DIR)/formality.tcl
 FM_AUTO_SCRIPT = $(FM_DIR)/formality_auto.tcl
+DFT_SCRIPT = $(DFT_DIR)/dft_insert.tcl
+FM_DFT_SCRIPT = $(DFT_DIR)/formality_dft.tcl
 
 # ==========================================
 # Post-Synthesis / Gate-Level Files
@@ -96,6 +102,9 @@ $(LIB_DB): | $(LIB_DIR)
 $(FM_OUT):
 	mkdir -p $(FM_OUT)
 
+$(FM_DFT_OUT):
+	mkdir -p $(FM_DFT_OUT)
+
 prep_libs: $(LIB_VERILOG) $(LIB_DB)
 
 # ==========================================
@@ -109,6 +118,9 @@ prep_sim_gls: prep_libs
 
 prep_synth: prep_libs
 	mkdir -p $(SYNTH_OUT)
+
+prep_dft: prep_libs
+	mkdir -p $(DFT_OUT)
 
 # ==========================================
 # RTL Syntax / Compilation / View
@@ -166,9 +178,22 @@ formality_auto: generate_fm_auto_script
 	cd $(FM_OUT) && env ROOT_DIR=$(ROOT_DIR) fm_shell -f $(FM_AUTO_SCRIPT) | tee formality_auto.log
 
 # ==========================================
+# DFT Insertion / Equivalency
+# ==========================================
+dft: prep_dft 
+	cd $(DFT_OUT) && env ROOT_DIR=$(ROOT_DIR) dc_shell -f $(DFT_SCRIPT) | tee dft.log
+
+formality_dft: $(FM_DFT_OUT) dft
+	cd $(FM_DFT_OUT) && env ROOT_DIR=$(ROOT_DIR) fm_shell -f $(FM_DFT_SCRIPT) | tee formality_dft.log
+
+dft_view:
+	cd $(DFT_OUT) && design_vision -x "set env(ROOT_DIR) $(ROOT_DIR); source $(SYNTH_DIR)/dc_setup.tcl; read_ddc $(REPORT_DIR)/dft/vending_top.ddc"
+
+
+# ==========================================
 # Simulation + Synthesis + GLS + View
 # ==========================================
-all: rtl_compile synthesis gls_compile rtl_run gls_run formality synth_view
+all: rtl_compile synth gls_compile rtl_run gls_run formality dft formality_dft synth_view
 
 # ==========================================
 # Clean-up
@@ -183,4 +208,4 @@ clean_libs:
 
 clean_all: clean clean_libs
 
-.PHONY: prep_libs prep_sim_rtl prep_sim_gls prep_synth rtl_syntax rtl_compile rtl_run rtl_view synthesis synth_view gls_syntax gls_compile gls_run gls_view all clean clean_libs clean_all
+.PHONY: prep_libs prep_sim_rtl prep_sim_gls prep_synth prep_dft rtl_syntax rtl_compile rtl_run rtl_view synth synth_view gls_syntax gls_compile gls_run gls_view dft formality_dft all clean clean_libs clean_all

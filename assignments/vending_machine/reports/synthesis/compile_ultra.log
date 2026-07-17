@@ -1,7 +1,6 @@
 Information: Performing leakage power optimization. (PWR-850)
-CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
-Analyzing: "/home/anderson.pereira/CIExpert/git-pessoal/assignments/vending_machine/libs/saed32rvt_tt1p05v25c.db"
-Library analysis succeeded.
+CPU Load: 6%, Ram Free: 168 GB, Swap Free: 11 GB, Work Disk Free: 3527 GB, Tmp Disk Free: 83 GB
+Alib files are up-to-date.
 Information: Evaluating DesignWare library utilization. (UISN-27)
 
 ============================================================================
@@ -42,7 +41,7 @@ Information: There are 11 potential problems in your design. Please run 'check_d
   Simplifying Design 'vending_top'
 
 Loaded alib file './alib-52/saed32rvt_tt1p05v25c.db.alib'
-CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
+CPU Load: 6%, Ram Free: 168 GB, Swap Free: 11 GB, Work Disk Free: 3527 GB, Tmp Disk Free: 83 GB
 Information: State dependent leakage is now switched from on to off.
 
   Beginning Pass 1 Mapping
@@ -91,7 +90,7 @@ Information: The register 'item_info_reg[price][7]' is a constant and will be re
 Information: Added key list 'DesignWare' to design 'comparator'. (DDB-72)
   Processing 'subtractor'
  Implement Synthetic for 'subtractor'.
-CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
+CPU Load: 6%, Ram Free: 168 GB, Swap Free: 11 GB, Work Disk Free: 3527 GB, Tmp Disk Free: 83 GB
 
   Updating timing information
 Information: Updating design information... (UID-85)
@@ -211,6 +210,8 @@ Threshold voltage group cell usage:
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
   --------- --------- --------- --------- --------- ------------------------- ---------
     0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
+    0:00:02     937.3      0.00       0.0       0.0                           108554688.0000
     0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
     0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
     0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
@@ -219,9 +220,7 @@ Threshold voltage group cell usage:
     0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
     0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
     0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
-    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
-    0:00:03     937.3      0.00       0.0       0.0                           108554688.0000
-CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
+CPU Load: 6%, Ram Free: 168 GB, Swap Free: 11 GB, Work Disk Free: 3527 GB, Tmp Disk Free: 83 GB
 Loading db file '/home/anderson.pereira/CIExpert/git-pessoal/assignments/vending_machine/libs/saed32rvt_tt1p05v25c.db'
 
 
@@ -232,7 +231,7 @@ Note: Symbol # after min delay cost means estimated hold TNS across all active s
   ---------------------
 Information: State dependent leakage is now switched from off to on.
 Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
-CPU Load: 13%, Ram Free: 181 GB, Swap Free: 11 GB, Work Disk Free: 3531 GB, Tmp Disk Free: 83 GB
+CPU Load: 6%, Ram Free: 168 GB, Swap Free: 11 GB, Work Disk Free: 3527 GB, Tmp Disk Free: 83 GB
 Information: Total number of MV cells in the design.
 ----------------------------------------------------------------------------------------------------
  MV Cells                                           Total Number                                   
