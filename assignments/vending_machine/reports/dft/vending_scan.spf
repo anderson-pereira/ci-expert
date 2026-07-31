@@ -3,7 +3,7 @@ STIL 1.0 {
 }
 Header {
     Title "Minimal STIL for design `vending_top'";
-    Date "Fri Jul 17 20:16:25 2026";
+    Date "Fri Jul 31 15:12:45 2026";
     Source "DFT Compiler X-2025.06-SP2";
 }
 Signals {

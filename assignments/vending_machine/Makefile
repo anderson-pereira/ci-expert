@@ -183,7 +183,7 @@ formality_auto: generate_fm_auto_script
 dft: prep_dft 
 	cd $(DFT_OUT) && env ROOT_DIR=$(ROOT_DIR) dc_shell -f $(DFT_SCRIPT) | tee dft.log
 
-formality_dft: $(FM_DFT_OUT) dft
+formality_dft: $(FM_DFT_OUT)
 	cd $(FM_DFT_OUT) && env ROOT_DIR=$(ROOT_DIR) fm_shell -f $(FM_DFT_SCRIPT) | tee formality_dft.log
 
 dft_view:
@@ -193,7 +193,7 @@ dft_view:
 # ==========================================
 # Simulation + Synthesis + GLS + View
 # ==========================================
-all: rtl_compile synth gls_compile rtl_run gls_run formality dft formality_dft synth_view
+all: rtl_compile synth gls_compile rtl_run gls_run formality dft formality_dft
 
 # ==========================================
 # Clean-up

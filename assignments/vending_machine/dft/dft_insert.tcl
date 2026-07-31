@@ -19,6 +19,8 @@ set TARGET_LIBRARY "saed32rvt_tt1p05v25c.db"
 set target_library "${LIB_DIR}/${TARGET_LIBRARY}"
 set link_library "* ${LIB_DIR}/${TARGET_LIBRARY}"
 
+set_svf ${REPORT_DIR}/default_dft.svf
+
 # 2. Lê a netlist funcional já sintetizada (golden desta atividade)
 read_verilog ${SYNTH_DIR}/vending_top_syn.v
 current_design vending_top
@@ -49,6 +51,8 @@ set_scan_configuration -chain_count 1
 preview_dft > ${REPORT_DIR}/preview_dft.rpt
 
 # 9. Inserção efetiva da cadeia de scan
+# set_svf ${REPORT_DIR}/default_dft.svf
+
 insert_dft
 
 # 10. DRC pós-inserção, agora com estimativa de cobertura de teste
@@ -64,6 +68,7 @@ compile -incremental
 write -format verilog -hierarchy -output ${REPORT_DIR}/vending_top_netlist_scan.v
 write -format ddc -hierarchy -output ${REPORT_DIR}/vending_top.ddc
 
+set_svf -off
 
 # 14. Artefatos de teste para uso posterior no ATPG (fora do escopo aqui)
 write_test_protocol -output ${REPORT_DIR}/vending_scan.spf
@@ -71,3 +76,5 @@ write_test_protocol -output ${REPORT_DIR}/vending_scan.spf
 # 15. Relatórios finais
 report_area > ${REPORT_DIR}/dft_area.rpt
 report_timing > ${REPORT_DIR}/dft_timing.rpt
+
+exit

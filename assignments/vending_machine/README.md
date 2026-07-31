@@ -14,8 +14,11 @@ The project follows a clean architecture, strictly separating the source code fi
 * **`pkg/`**: Contains package definitions (`.sv`), such as global structs and enums.
 * **`sim/`**: Contains the main testbench (`tb_vending.sv`).
 * **`synth/`**: Contains the TCL scripts (`synthesize.tcl`, `.synopsys_dc.setup`) and constraints (SDC) for the Design Compiler.
+* **`fm/`**: Contains the Formality TCL scripts (`formality.tcl`) used to verify equivalence between the RTL (golden) and the synthesized netlist (revision).
+* **`dft/`**: Contains the TCL scripts for scan chain insertion (`dft_insert.tcl`) and its post-DFT equivalence check against the functional netlist (`formality_dft.tcl`).
 * **`libs/`** *(Auto-generated)*: Directory where the Makefile automatically copies the Verilog and DB libraries from the local PDK (Process Design Kit).
-* **`build/`** *(Auto-generated)*: Isolated directory where **all** logs, executables, database files (`.daidir`, `.db`), and waveforms (`.fsdb`) are saved. It is subdivided into `sim_rtl`, `sim_gls`, and `synthesis`.
+* **`build/`** *(Auto-generated)*: Isolated directory where **all** logs, executables, database files (`.daidir`, `.db`), and waveforms (`.fsdb`) are saved. It is subdivided into `sim_rtl`, `sim_gls`, `synthesis`, `formality`, and `dft`.
+* **`reports/`** *(Auto-generated)*: Directory where area, timing, power, and equivalence-checking reports are saved, subdivided into `synthesis/`, `formality_synth/`, `dft/`, and `formality_dft/`.
 
 ---
 
@@ -38,7 +41,7 @@ Open the terminal at the project root and use the commands below:
 
 ### 1. Full Automated Flow
 
-Executes **everything**: compiles and runs the RTL simulation, performs logic synthesis, compiles the netlist (GLS), and opens the Design Vision GUI with the synthesized schematic.
+Executes **everything**: compiles and runs the RTL simulation, performs logic synthesis, compiles the netlist (GLS), runs the RTL-vs-netlist Formality check, inserts the DFT scan chain, runs the post-DFT Formality check, and opens the Design Vision GUI with the synthesized schematic.
 
 ```bash
 make
@@ -68,6 +71,22 @@ These commands simulate the behavior of the final hardware *netlist* (`vending_m
 * `make gls_compile` : Analyzes the netlist and compiles the GLS simulator.
 * `make gls_run` : Executes the GLS simulation.
 * **`make gls_view`** : Executes the GLS simulation and opens **Verdi** so you can compare signals and ensure functionality was preserved after synthesis.
+
+### 5. Formality (RTL vs. Netlist Equivalence)
+
+Runs **Formality** to formally prove that the synthesized netlist is logically equivalent to the original RTL, using the SVF guidance generated during synthesis (`make synth`, which is run automatically as a dependency).
+
+* `make formality` : Runs `fm_shell` with `fm/formality.tcl`, comparing the RTL (golden) against `vending_top_syn.v` (revision), and writes the match/verify reports to `reports/formality_synth/`.
+* `make generate_fm_auto_script` : Uses `fm_mk_script` to generate an auto-matching script (`fm/formality_auto.tcl`) from the synthesis SVF.
+* `make formality_auto` : Runs Formality using the auto-generated script instead of the manual one.
+
+### 6. DFT (Scan Chain Insertion & Equivalence)
+
+Inserts a mux-scan chain into the synthesized netlist and verifies that test logic didn't alter the design's functional behavior. *Warning: If synthesis hasn't been done yet, Make will run it automatically before the DFT insertion.*
+
+* `make dft` : Runs `dc_shell` with `dft/dft_insert.tcl` on top of `vending_top_syn.v`, generating the scan-inserted netlist (`vending_top_netlist_scan.v`), the test protocol (`vending_scan.spf`), and DRC/area/timing reports under `reports/dft/`.
+* **`make dft_view`** : Opens **Design Vision** with the post-DFT `.ddc` so you can inspect the inserted scan chain.
+* `make formality_dft` : Runs `fm_shell` with `dft/formality_dft.tcl`, comparing the functional netlist (golden) against the scan-inserted netlist (revision, with `scan_enable` held at 0), and writes the reports to `reports/formality_dft/`.
 
 ---
 
